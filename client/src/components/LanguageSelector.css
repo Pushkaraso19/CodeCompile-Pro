@@ -1,0 +1,36 @@
+.language-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .language-selector label {
+    font-weight: 500;
+  }
+  
+  .language-selector select {
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    min-width: 150px;
+  }
+  
+  .light-mode .language-selector select {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #333;
+  }
+  
+  .dark-mode .language-selector select {
+    background-color: #3c3c3c;
+    border: 1px solid #555;
+    color: #e0e0e0;
+  }
+  
+  .language-selector select:focus {
+    outline: none;
+    border-color: #4caf50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  }
