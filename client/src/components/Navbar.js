@@ -53,7 +53,7 @@ function Navbar({ onToggleTheme, theme, onNavigate, currentPage }) {
           )}
         </motion.button>
         <motion.a 
-          href="https://github.com/your-username/code-compile-pro" 
+          href="https://github.com/Pushkaraso19/CodeCompile-Pro" 
           target="_blank" 
           rel="noreferrer"
           whileHover={{ scale: 1.1, color: theme === "vs-dark" ? "#81c784" : "#4caf50" }}

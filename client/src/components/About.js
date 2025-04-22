@@ -156,7 +156,7 @@ function About({ theme, onBack }) {
         <h2>Open Source</h2>
         <p>
           CodeCompile Pro is an open-source project. Contributions, bug reports, and feature requests are 
-          welcome on our <a href="https://github.com/your-username/code-compile-pro" target="_blank" rel="noreferrer">GitHub repository</a>.
+          welcome on our <a href="https://github.com/Pushkaraso19/CodeCompile-Pro" target="_blank" rel="noreferrer">GitHub repository</a>.
         </p>
       </motion.section>
       
