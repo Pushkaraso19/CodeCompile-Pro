@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
+import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
-import CodeEditor from "./components/Editor";
 import Navbar from "./components/Navbar";
+import CodeEditor from "./components/Editor";
+import About from "./components/About";
 import LanguageSelector from "./components/LanguageSelector";
 import OutputDisplay from "./components/OutputDisplay";
-import About from "./components/About";
 import "./App.css";
 
 function App() {
@@ -15,7 +16,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [theme, setTheme] = useState("vs-dark");
   const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState("editor");
   const [executionTime, setExecutionTime] = useState(null);
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [codeName, setCodeName] = useState("");
@@ -285,28 +285,12 @@ function App() {
 
   return (
     <div className={`app ${theme === "vs-dark" ? "dark-mode" : "light-mode"}`}>
-      <Navbar
-        onToggleTheme={toggleTheme}
-        theme={theme}
-        onNavigate={setCurrentPage}
-        currentPage={currentPage}
-      />
+      <Navbar onToggleTheme={toggleTheme} theme={theme} />
 
-      <AnimatePresence mode="wait">
-        {currentPage === "editor" ? (
-          <motion.div
-            key="editor"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <EditorView />
-          </motion.div>
-        ) : (
-          <About key="about" theme={theme} onBack={() => setCurrentPage("editor")} />
-        )}
-      </AnimatePresence>
+      <Routes>
+        <Route path="/" element={<EditorView />} />
+        <Route path="/about" element={<About theme={theme} />} />
+      </Routes>
 
       <AnimatePresence>
         {showSaveModal && (

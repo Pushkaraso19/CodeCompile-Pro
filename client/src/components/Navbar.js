@@ -1,19 +1,24 @@
 import { motion } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
+import { FiSun, FiMoon } from "react-icons/fi";
 import PropTypes from "prop-types";
-import { FiSun, FiMoon } from "react-icons/fi"; 
 import "./Navbar.css";
 
-function Navbar({ onToggleTheme, theme, onNavigate, currentPage }) {
+function Navbar({ onToggleTheme, theme }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentPage = location.pathname;
+
   return (
-    <motion.nav 
+    <motion.nav
       className="navbar"
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ type: "spring", stiffness: 100 }}
     >
       <div className="navbar-logo">
-        <motion.div 
-          onClick={() => onNavigate("editor")}
+        <motion.div
+          onClick={() => navigate("/")}
           style={{ cursor: "pointer", display: "flex", alignItems: "center" }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -27,9 +32,10 @@ function Navbar({ onToggleTheme, theme, onNavigate, currentPage }) {
           </motion.h1>
         </motion.div>
       </div>
+
       <div className="navbar-links">
-        <motion.button 
-          className="theme-toggle" 
+        <motion.button
+          className="theme-toggle"
           onClick={onToggleTheme}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -52,34 +58,69 @@ function Navbar({ onToggleTheme, theme, onNavigate, currentPage }) {
             </motion.span>
           )}
         </motion.button>
-        <motion.a 
-          href="https://github.com/Pushkaraso19/CodeCompile-Pro" 
-          target="_blank" 
-          rel="noreferrer"
-          whileHover={{ scale: 1.1, color: theme === "vs-dark" ? "#81c784" : "#4caf50" }}
-          whileTap={{ scale: 0.9 }}
-        >
-          GitHub
-        </motion.a>
-        <motion.span 
-          onClick={() => onNavigate("about")}
-          whileHover={{ scale: 1.1, color: theme === "vs-dark" ? "#81c784" : "#4caf50" }}
-          whileTap={{ scale: 0.9 }}
-          style={{ 
-            fontWeight: "bold",
-            cursor: "pointer", 
-            background: currentPage === "about" 
-              ? "linear-gradient(90deg, #4caf50, #2196f3)" 
-              : "transparent",
-            WebkitBackgroundClip: currentPage === "about" ? "text" : "unset",
-            WebkitTextFillColor: currentPage === "about" ? "transparent" : "inherit"
+
+        <motion.span
+          onClick={() => navigate("/")}
+          whileHover={{
+            scale: 1.1,
+            color: theme === "vs-dark" ? "#81c784" : "#4caf50",
           }}
-          whileHover={{ scale: 1.1, color: theme === "vs-dark" ? "#81c784" : "#4caf50" }}
           whileTap={{ scale: 0.9 }}
-          className={currentPage === "about" ? "active-nav-link" : ""}
+          style={{
+            fontWeight: "bold",
+            cursor: "pointer",
+            color: theme === "vs-dark" ? "#fff" : "#333",
+            background:
+              currentPage === "/" ? "linear-gradient(90deg, #4caf50, #2196f3)" : "transparent",
+            WebkitBackgroundClip: currentPage === "/" ? "text" : "unset",
+            WebkitTextFillColor: currentPage === "/" ? "transparent" : "inherit",
+            transition: "all 0.5s ease",
+          }}
+          className={currentPage === "/" ? "active-nav-link" : ""}
+        >
+          Home
+        </motion.span>
+
+        <motion.span
+          onClick={() => navigate("/about")}
+          whileHover={{
+            scale: 1.1,
+            color: theme === "vs-dark" ? "#81c784" : "#4caf50",
+          }}
+          whileTap={{ scale: 0.9 }}
+          style={{
+            fontWeight: "bold",
+            cursor: "pointer",
+            color: theme === "vs-dark" ? "#fff" : "#333",
+            background:
+              currentPage === "/about"
+                ? "linear-gradient(90deg, #4caf50, #2196f3)"
+                : "transparent",
+            WebkitBackgroundClip: currentPage === "/about" ? "text" : "unset",
+            WebkitTextFillColor: currentPage === "/about" ? "transparent" : "inherit",
+            transition: "all 0.5s ease",
+          }}
+          className={currentPage === "/about" ? "active-nav-link" : ""}
         >
           About
         </motion.span>
+
+        <motion.a
+          href="https://github.com/Pushkaraso19/CodeCompile-Pro"
+          target="_blank"
+          rel="noreferrer"
+          whileHover={{
+            scale: 1.1,
+            color: theme === "vs-dark" ? "#81c784" : "#4caf50",
+          }}
+          whileTap={{ scale: 0.9 }}
+          style={{
+            fontWeight: "bold",
+            color: theme === "vs-dark" ? "#fff" : "#333",
+          }}
+        >
+          GitHub
+        </motion.a>
       </div>
     </motion.nav>
   );
@@ -88,8 +129,6 @@ function Navbar({ onToggleTheme, theme, onNavigate, currentPage }) {
 Navbar.propTypes = {
   onToggleTheme: PropTypes.func.isRequired,
   theme: PropTypes.string.isRequired,
-  onNavigate: PropTypes.func.isRequired,
-  currentPage: PropTypes.string.isRequired
 };
 
 export default Navbar;
